@@ -364,7 +364,7 @@ class Agent():
 
         return next_state, reward, env.done
 
-env = Agent()
+env = Agent(EpsilonGreedyStrategy, 4, device)
 
 def get_reward(state):
     reward = 0.0

@@ -418,7 +418,7 @@ def plot(values,value2, moving_avg_period, epsilon):
     plt.title('Training...')
     # Name axis
     plt.xlabel('Episode')
-    plt.ylabel('Duration')
+    plt.ylabel('Reward')
     # Give values to plot - episode durations
     plt.plot(values)
     plt.plot(value2)
@@ -494,15 +494,11 @@ target_update = 10 # How frequently we update target network with policy network
 memory_size = 100000 # How many expereinces will remember
 lr = 0.4 # Learning rate
 num_episodes = 1000 # Num of episodes
+strategy = EpsilonGreedyStrategy(eps_start,eps_end,eps_decay)
 
-# USe GPU is available, otherwise, cpu
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-# Set strategy with epsilon greedy strategy
-strategy = EpsilonGreedyStrategy(eps_start, eps_end, eps_decay)
-# Define agent 
 env = Agent(strategy, 4, device)
-# initialize memory
-memory = ReplayMemory(memory_size)
+
 
 num_episodes = 10000
 
