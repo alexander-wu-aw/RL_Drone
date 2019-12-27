@@ -1,0 +1,13 @@
+<launch>
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find rl)/worlds/drone_test.world" />
+        <!-- <arg name="world_name" value="$(find cvg_sim_gazebo)/worlds/ardrone_testworld.world"/> -->
+    </include>
+    <include file="$(find rl)/launch/spawn_quadrotor.launch" >
+        <arg name="model" value="$(find rl)/urdf/quadrotor_sensors.urdf.xacro"/>
+<!--         <arg name="model" value="$(find rl)/urdf/model.sdf"/> 
+ -->    </include>
+    <!-- <node pkg="ardrone_autonomy" name="ardrone_driver" type="ardrone_driver" output="screen"/> -->
+    
+    <node pkg="rl" name="control_script" type="Q-Learning.py" output="screen" />
+</launch>

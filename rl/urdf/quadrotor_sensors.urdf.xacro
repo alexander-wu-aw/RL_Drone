@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<robot name="quadrotor_hokuyo_utm30lx"
+xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+xmlns:xacro="http://ros.org/wiki/xacro">
+   
+    <xacro:property name="M_PI" value="3.1415926535897931" />
+    
+    <!-- Included URDF Files -->
+    <xacro:include filename="$(find cvg_sim_gazebo)/urdf/quadrotor_base.urdf.xacro" />
+    
+    <!-- Instantiate quadrotor_base_macro once (has no parameters atm) -->
+    <quadrotor_base_macro />
+    
+
+    <!-- Sonar height sensor -->
+    <xacro:include filename="$(find cvg_sim_gazebo)/urdf/sensors/sonar_sensor.urdf.xacro" />
+    <xacro:sonar_sensor name="sonar" parent="base_link" ros_topic="sonar_height" update_rate="10" min_range="0.01" max_range="3.0" field_of_view="${40*M_PI/180}" ray_count="3">
+      <origin xyz="-0.15 0.0 0.0" rpy="0 ${90*M_PI/180} 0"/>
+    </xacro:sonar_sensor>
+    
+</robot>
+  
